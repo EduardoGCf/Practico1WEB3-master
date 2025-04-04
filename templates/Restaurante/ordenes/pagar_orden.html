@@ -1,0 +1,24 @@
+{% extends "Restaurante/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Pagar Orden #{{ orden.id }}</h2>
+
+    <form method="post" class="card p-4 shadow-sm">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Seleccionar Cliente</label>
+            <select name="cliente" id="cliente" class="form-select">
+                {% for cliente in clientes %}
+                    <option value="{{ cliente.id }}">{{ cliente.nombres }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Confirmar Pago</button>
+            <a href="{% url 'orden_list' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
